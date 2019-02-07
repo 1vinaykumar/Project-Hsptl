@@ -1,0 +1,37 @@
+{% extends 'user_base.html' %}
+{% block user %}
+{% if stat != 'No Appointments' %}
+            <table align="center" border="1" cellspacing="10" >
+                <tr>
+                    <th><font color="#C5C6C7" size="4px">ID</font></th>
+                    <th><font color="#C5C6C7" size="4px">Date</font></th>
+                    <th><font color="#C5C6C7" size="4px">Slot</font></th>
+                    <th><font color="#C5C6C7" size="4px">Problem</font></th>
+                    <th><font color="#C5C6C7" size="4px">Status</font></th>
+                    <th><font color="#C5C6C7" size="4px">Other</font></th>
+                </tr>
+                {% for f in form %}
+                <tr>
+                    <td><font color="#C5C6C7" size="4px">{{ f.id }}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_date }}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{% with a=f.app_slot %} {% for i,j in time_list.items %} {% if i == a %} {{ j }} {% endif %} {% endfor %} (Slot {{ a }}) {% endwith %}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_prob }}</font></td>
+                    {% if f.app_status == 1 %}
+                    <td><font color="#C5C6C7" size="4px">Confirmed</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_doct }}</font></td>
+                    {% elif f.app_status == 2 %}
+                    <td><font color="#C5C6C7" size="4px">Pending</font></td>
+                    <form method="POST" action="{% url 'cancel_app' %}"> {% csrf_token %}
+                            <input type="hidden" value="{{ f.id }}" name="id">
+                            <input type="hidden" value='cancel' name='confirm'>
+                        <td><font color="#C5C6C7" size="4px"><input type="submit" value="Cancel"></font></td>
+                        </form>
+                    {% else %}
+                    <td><font color="#C5C6C7" size="4px">Canceled</font></td>
+                    <td><font color="#C5C6C7" size="4px"></font></td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+        </table>
+        {% endif %}
+{% endblock user %}

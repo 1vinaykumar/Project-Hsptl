@@ -1,0 +1,23 @@
+{% extends 'user_base.html' %}
+{% block user %}
+<center><h3><font color="red">Book Appointment</font></h3></center>
+<br/>
+<form method="POST" align="center" action="{% url 'book_app' %}">
+    {% csrf_token %}
+            <table align="center" border="1" bgcolor="#1F2833"><tr><td>
+            <table cellpadding="15" cellspacing="10">
+                {% for fi in form %}
+                <tr>
+                    <td><font color="#C5C6C7" size="4px">{{ fi.label|capfirst }}</font></td>
+                    <td>{{ fi }}</td>
+                </tr>
+                {% endfor %}
+                <tr><td></td><td align="left"><input type="submit" value="Submit"></td> </tr>
+            </table>
+            </td></tr></table>
+    </form>
+    <br/>
+    <br/>
+    <center><h3><font color="red">{{ stat }}</font></h3></center>
+    <br/>
+{% endblock user %}

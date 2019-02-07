@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block content1 %}
+<li style="float:left"><a href="{% url 'priv_user' %}"><font color="white" >** {{ user }} **</font></a></li>
+<li style="float:left"><a href="{% url 'priv_edit' %}" ><font color="white">Edit Details</font></a></li>
+<li style="float:left"><a href="{% url 'logout' %}" ><font color="white">Logout</font></a></li>
+{% endblock content1 %}
+{% block content %}
+{% block priv_edit %}
+
+        <center><h3><font color="red">{{ stat }}</font></h3></center>
+        {% if stat != 'No Appointments' %}
+        <center><font color="#C5C6C7" size="4px">Pending Appointments</font></center> <br/><br/>
+        <table border="1" bgcolor="#1F2833" align="center"> <tr><td>
+            <table cellspacing="10" border="="1">
+                <tr>
+                    <th><font color="#C5C6C7" size="4px">ID</font></th>
+                    <th><font color="#C5C6C7" size="4px">Date</font></th>
+                    <th><font color="#C5C6C7" size="4px">Slot</font></th>
+                    <th><font color="#C5C6C7" size="4px">Problem</font></th>
+                    <th></th>
+                    <th></th>
+                    <!--<th><font color="#C5C6C7" size="4px">Status</font></th>
+                    <th><font color="#C5C6C7" size="4px">Other</font></th> -->
+                </tr>
+                {% for f in form %}
+                <tr>
+                    <td><font color="#C5C6C7" size="4px">{{ f.id }}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_date }}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_slot }}</font></td>
+                    <td><font color="#C5C6C7" size="4px">{{ f.app_prob }}</font></td>
+                    <form method="POST" action="{% url 'cancel_app' %}"> {% csrf_token %}
+                        <input type="hidden" value= {{ f.id }} name="id">
+                        <input type="hidden" value='confirm' name='confirm'>
+                    <td><font color="#C5C6C7" size="4px"><input type="submit" value="Confirm"></font></td>
+                    </form>
+                    <form method="POST" action="{% url 'cancel_app' %}"> {% csrf_token %}
+                            <input type="hidden" value= {{ f.id }} name="id">
+                            <input type="hidden" value='cancel' name='confirm'>
+                        <td><font color="#C5C6C7" size="4px"><input type="submit" value="Cancel"></font></td>
+                        </form>
+                    
+                </tr>
+                {% endfor %}
+                
+            </table>
+            </td></tr>
+        </table>
+        <br/><br/><br/>
+        <center><font color="#C5C6C7" size="4px">Confirmed Appointments</font></center> <br/><br/>
+        <table border="1" bgcolor="#1F2833" align="center"> <tr><td>
+                <table cellspacing="10" border="="1">
+                    <tr>
+                            <th><font color="#C5C6C7" size="4px">ID</font></th>
+                        <th><font color="#C5C6C7" size="4px">Date</font></th>
+                        <th><font color="#C5C6C7" size="4px">Slot</font></th>
+                        <th><font color="#C5C6C7" size="4px">Problem</font></th>
+                        <th></th>
+                        <!--<th><font color="#C5C6C7" size="4px">Status</font></th>
+                        <th><font color="#C5C6C7" size="4px">Other</font></th> -->
+                    </tr>
+                    {% for f in form1 %}
+                    <tr>
+                            <td><font color="#C5C6C7" size="4px">{{ f.id }}</font></td>
+                        <td><font color="#C5C6C7" size="4px">{{ f.app_date }}</font></td>
+                        <td><font color="#C5C6C7" size="4px">{{ f.app_slot }}</font></td>
+                        <td><font color="#C5C6C7" size="4px">{{ f.app_prob }}</font></td>
+                        <form method="POST" action="{% url 'cancel_app' %}"> {% csrf_token %}
+                                <input type="hidden" value= {{ f.id }} name="id">
+                                <input type="hidden" value='cancel' name='confirm'>
+                            <td><font color="#C5C6C7" size="4px"><input type="submit" value="Cancel"></font></td>
+                            </form>
+                    </tr>
+                    {% endfor %}
+                    
+                </table>
+                </td></tr>
+            </table>
+        
+        {% endif %}
+{% endblock priv_edit %}
+{% endblock content %}

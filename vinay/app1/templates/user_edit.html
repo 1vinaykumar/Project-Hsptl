@@ -1,0 +1,18 @@
+{% extends 'user_base.html' %}
+{% block user %}
+<center><h1>Edit details</h1></center>
+{% if not stat %}
+<form action="{% url 'user_edit' %}" method="POST" align="center">
+    {% csrf_token %}
+    <table border="0" bgcolor="#1F2833" align="center" cellspacing="10" cellpadding="15">
+        
+            {% for f in form %}
+            <tr><td><font color="#C5C6C7" size="4px">{{ f.label|capfirst }}</font></td><td> {{ f }}</td></tr>
+            {% endfor %}
+            <tr><td></td><td><center><input type="submit" value="Submit"></center></td></tr>
+            
+    </table>
+</form>
+{% endif %}
+<center><font color="green" size="5px">{{ succ }}</font></center>
+{% endblock user %}

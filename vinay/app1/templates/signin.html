@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="POST" align="center" action="{% url 'signin' %}">
+		{% csrf_token %}
+			<center>
+					
+				<table border="1" bgcolor="#1F2833"><tr><td>
+				<table cellpadding="15" cellspacing="10">
+					{% for fi in form %}
+					<tr><td><font color="#C5C6C7" size="4px">{{ fi.label|capfirst }}</font></td> <td>{{ fi }}</td></tr>
+					{% endfor %}
+					<tr><td><a href="{% url 'forgot' %}">Forgot Password ?</a></td><td align="center"><input type="submit" value="Login"></td> </tr>
+				</table>
+				</td></tr></table>
+				<br/>
+				
+			</center>
+		</form>
+<center>
+{% if stat == 'Wrong Password' or stat == 'User Not available' %}
+<font color="red" size="5px">{{ stat }}</font>
+{% else %}
+<font color="green" size="5px">{{ stat }}</font>
+<br/>
+{% if stat %}
+<font size="7px"><a href="{% url 'logout' %}">Logout</a></font>
+{% endif %}
+{% endif %}
+</center>
+{% endblock content %}
+
+
+
+				
+
+

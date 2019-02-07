@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            {{ title }}
+        </title>
+        {% load static %}
+        <link rel="icon" type="image/icon" href="{% static 'in.png' %}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+            
+            #nav {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            li a {
+                display:block;
+                padding: 15px 70px;
+                
+                text-decoration: none ;
+            }
+            a:hover:not(.active) {
+                background-color: #111;
+            }
+
+        </style>
+    </head>
+    <body bgcolor="#1D2228">
+            <center><h1 style="font-size:4vw;"><b><font color="#FB8122">Vinay Kumar</font></b></h1></center>
+            <center>
+            <nav style="background-color: rgb(255, 123, 0); display: inline-block;">
+                <ul id="nav">
+                    
+                    {% block content1 %}
+                    <li style="float:left"><a href="{% url 'home' %}"  ><font color="white" >Home</font></a></li>
+                    <li style="float:left"><a href="{% url 'register' %}"  ><font color="white">Register</font></a></li>
+                    <li style="float:left"><a href="{% url 'signin' %}"  ><font color="white" >Login</font></a></li>
+                    <li style="float:left"> <a href="{% url 'about' %}"  ><font color="white" >About</font></a> </li>
+                    <li style="float:left"><a href="{% url 'contact' %}"  ><font color="white" >Contact</font></a></li>
+                    {% endblock content1 %}
+                </ul>
+            </nav>
+            </center>
+            <br/>
+            <br/>
+            <br/>
+                
+        {% block content %}
+        {% endblock content %}
+            </body>
+</html>

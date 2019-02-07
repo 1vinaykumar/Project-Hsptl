@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="POST" align="center" action="{% url 'forgot' %}">
+		{% csrf_token %}
+			<center>
+					
+				<table border="1" bgcolor="#1F2833"><tr><td>
+				<table cellspacing="10" cellpadding="15">
+					{% for fi in form %}
+					<tr><td><font color="#C5C6C7" size="4px">{{ fi.label|capfirst }}</font></td> <td>{{ fi }}</td></tr>
+					{% endfor %}
+					<tr><td><a href="{% url 'signin' %}"> Login</a></td><td align="center"><input type="submit" value="Submit"></td> </tr>
+				</table>
+				</td></tr></table>
+				<br/>
+				{% if val == 'User Not available' %}
+				<font color="red" size="5px">{{ val }}</font>
+				{% else %}
+				<font color="green" size="5px">{{ val }}</font>
+				{% endif %}
+			</center>
+		</form>
+		
+		
+		{% endblock content %}
+
+
+
+				
+
+

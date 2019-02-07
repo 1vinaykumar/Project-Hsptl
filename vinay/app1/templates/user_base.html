@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content1 %}
+<li style="float:left"><a href="{% url 'user' %}"><font color="white" >{{ user }}</font></a></li>
+<li style="float:left"><a href="{% url 'app_show' %}"><font color="white">Appointments</font></a></li>
+<li style="float:left"><a href="{% url 'book_app' %}"><font color="white">Book Appointment</font></a></li>
+<li style="float:left"><a href="{% url 'user_edit' %}"><font color="white">Edit Details</font></a></li>
+<li style="float:left"><a href="{% url 'logout' %}"><font color="white">Logout</font></a></li>
+
+{% endblock content1 %}
+
+{% block content %}
+{% block user %}
+<center>Vinay</center>
+{% endblock user %}
+{% endblock content %}
